@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 from .utils import image_to_np_ndarray
+import clip
 from PIL import Image
 
 

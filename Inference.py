@@ -77,10 +77,10 @@ def main(args):
     args.point_prompt = ast.literal_eval(args.point_prompt)
     args.box_prompt = convert_box_xywh_to_xyxy(ast.literal_eval(args.box_prompt))
     args.point_label = ast.literal_eval(args.point_label)
-    input = Image.open(args.img_path)
-    input = input.convert("RGB")
+    image = Image.open(args.img_path)
+    image = image.convert("RGB")
     everything_results = model(
-        input,
+        image,
         device=args.device,
         retina_masks=args.retina,
         imgsz=args.imgsz,
@@ -90,7 +90,7 @@ def main(args):
     bboxes = None
     points = None
     point_label = None
-    prompt_process = FastSAMPrompt(input, everything_results, device=args.device)
+    prompt_process = FastSAMPrompt(image, everything_results, device=args.device)
     if args.box_prompt[0][2] != 0 and args.box_prompt[0][3] != 0:
             ann = prompt_process.box_prompt(bboxes=args.box_prompt)
             bboxes = args.box_prompt
